@@ -8,6 +8,63 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <header id="topbar">
+      <img id="logo" src="/images/02hogwarts.png" alt="Hogwarts Logo" />
+      <h1>Hogwarts School of Witchcraft and Wizardry</h1>
+    </header>
+
+    <main>
+      <nav id="filter_buttons">
+        <button class="filter clicked" data-student="all"></button>
+        <button class="filter" data-student="Slytherin"></button>
+        <button class="filter" data-student="Hufflepuff"></button>
+        <button class="filter" data-student="Ravenclaw"></button>
+        <button class="filter" data-student="Gryffindor"></button>
+      </nav>
+
+      <h3 class="section_header">All Students</h3>
+      <section id="popup">
+        <article class="popup_content">
+          <div class="close">X</div>
+          <div class="popup_column">
+            <h3 class="nickname lastname"></h3>
+            <h4 class="firstname"></h4>
+            <p id="house"></p>
+            <p id="gender"></p>
+            <img id="photo" src="" alt="" />
+          </div>
+          <div class="popup_column"></div>
+        </article>
+      </section>
+      <table id="list">
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- student template will be copied and inserted here -->
+        </tbody>
+      </table>
+    </main>
+
+    <template id="student">
+      <tr>
+        <td data-field="firstname">NAME</td>
+        <img src="" alt="" />
+        <td data-field="nickname">NAME</td>
+        <td data-field="middlename">NAME</td>
+        <td data-field="lastname">NAME</td>
+        <td data-field="house">HOUSE</td>
+        <td data-field="gender">GENDER</td>
+      </tr>
+    </template>
+
     <script src="script.js"></script>
   </body>
 </html>

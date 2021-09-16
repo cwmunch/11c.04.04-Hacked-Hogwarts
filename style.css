@@ -5,3 +5,74 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+@font-face {
+  font-family: "Harry Potter";
+  src: url("/fonts/HarryPotter.woff2") format("woff2"), url("/fonts/HarryPotter.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/*-----------------HEADER-------------------*/
+#topbar {
+  display: flex;
+  flex-flow: wrap row;
+  background-color: #740001;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  height: 180px;
+}
+
+#topbar h1 {
+  font-family: "Harry Potter";
+  color: #ececec;
+  font-size: 3.2em;
+}
+
+#logo {
+  justify-content: left;
+  padding: 1em;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/*-----------------FILTER BUTTONS-------------------*/
+#filter_buttons {
+  display: flex;
+  justify-content: center;
+}
+
+#filter_buttons > button {
+  height: 155px;
+  width: 155px;
+  cursor: pointer;
+  margin: 2em;
+  transition: all 0.5s ease-in;
+  background-color: white;
+  border: none;
+}
+
+button[data-student="all"] {
+  background-image: url(/images/hogwarts.png);
+  background-repeat: no-repeat;
+}
+
+button[data-student="Slytherin"] {
+  background-image: url(/images/01slytherin.png);
+  background-repeat: no-repeat;
+}
+button[data-student="Hufflepuff"] {
+  background-image: url(/images/01hufflepuff.png);
+  background-repeat: no-repeat;
+}
+button[data-student="Ravenclaw"] {
+  background-image: url(/images/01ravenclaw.png);
+  background-repeat: no-repeat;
+}
+button[data-student="Gryffindor"] {
+  background-image: url(/images/01gryffindor.png);
+  background-repeat: no-repeat;
+}

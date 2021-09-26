@@ -8,7 +8,7 @@
 
 @font-face {
   font-family: "Harry Potter";
-  src: url("/fonts/HarryPotter.woff2") format("woff2"), url("/fonts/HarryPotter.woff") format("woff");
+  src: url("./fonts/HarryPotter.woff2") format("woff2"), url("./fonts/HarryPotter.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -79,24 +79,24 @@
 }
 
 button[data-filter="*"] {
-  background-image: url(/images/hogwarts.png);
+  background-image: url(./images/hogwarts.png);
   background-repeat: no-repeat;
 }
 
 button[data-filter="Slytherin"] {
-  background-image: url(/images/01slytherin.png);
+  background-image: url(./images/01slytherin.png);
   background-repeat: no-repeat;
 }
 button[data-filter="Hufflepuff"] {
-  background-image: url(/images/01hufflepuff.png);
+  background-image: url(./images/01hufflepuff.png);
   background-repeat: no-repeat;
 }
 button[data-filter="Ravenclaw"] {
-  background-image: url(/images/01ravenclaw.png);
+  background-image: url(./images/01ravenclaw.png);
   background-repeat: no-repeat;
 }
 button[data-filter="Gryffindor"] {
-  background-image: url(/images/01gryffindor.png);
+  background-image: url(./images/01gryffindor.png);
   background-repeat: no-repeat;
 }
 

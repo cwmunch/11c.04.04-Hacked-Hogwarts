@@ -14,21 +14,35 @@
   font-display: swap;
 }
 
+:root {
+  --gryf-bg-clr: #740001;
+  --gryf-clr: #d3a625;
+  --slyt-bg-clr: #aaaaaa;
+  --slyt-clr: #1a472a;
+  --rave-bg-clr: #222f5b;
+  --rave-clr: #ae7114;
+  --huff-bg-clr: #60605c;
+  --huff-clr: #ffdb00;
+
+  --header-clr: #ececec;
+  --dark-font-clr: #151515;
+}
+
 /*-----------------HEADER-------------------*/
 #topbar {
   display: flex;
   flex-flow: wrap row;
-  background-color: #740001;
+  background-color: var(--gryf-bg-clr);
   justify-content: center;
   align-items: center;
   padding: 1rem;
-  height: 180px;
+  height: 120px;
 }
 
 #topbar h1 {
   font-family: "Harry Potter";
-  color: #ececec;
-  font-size: 3.2em;
+  color: var(--header-clr);
+  font-size: 2em;
 }
 
 #logo {
@@ -37,8 +51,17 @@
   position: absolute;
   top: 0;
   left: 0;
+  height: 120px;
+  width: 120px;
 }
 
+#topbar input {
+  position: absolute;
+  right: 0;
+  padding: 0.5em;
+  margin: 1em;
+  border-radius: 15px;
+}
 /*-----------------FILTER BUTTONS-------------------*/
 #filter_buttons {
   display: flex;
@@ -46,33 +69,329 @@
 }
 
 #filter_buttons > button {
-  height: 155px;
-  width: 155px;
+  height: 150px;
+  width: 150px;
   cursor: pointer;
-  margin: 2em;
+  margin: 1em;
   transition: all 0.5s ease-in;
   background-color: white;
   border: none;
 }
 
-button[data-student="all"] {
+button[data-filter="*"] {
   background-image: url(/images/hogwarts.png);
   background-repeat: no-repeat;
 }
 
-button[data-student="Slytherin"] {
+button[data-filter="Slytherin"] {
   background-image: url(/images/01slytherin.png);
   background-repeat: no-repeat;
 }
-button[data-student="Hufflepuff"] {
+button[data-filter="Hufflepuff"] {
   background-image: url(/images/01hufflepuff.png);
   background-repeat: no-repeat;
 }
-button[data-student="Ravenclaw"] {
+button[data-filter="Ravenclaw"] {
   background-image: url(/images/01ravenclaw.png);
   background-repeat: no-repeat;
 }
-button[data-student="Gryffindor"] {
+button[data-filter="Gryffindor"] {
   background-image: url(/images/01gryffindor.png);
   background-repeat: no-repeat;
+}
+
+/*-------------------------LIST STYLE-----------------------*/
+.section__header {
+  display: flex;
+  justify-content: center;
+  font-family: "Harry Potter";
+  color: var(--dark-font-clr);
+  font-size: 1.5em;
+}
+
+main p,
+select {
+  margin-left: 10rem;
+}
+
+main p {
+  font-family: "Harry Potter";
+  color: var(--dark-font-clr);
+  font-size: 1.5em;
+}
+
+#list,
+.sorting {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+#list td {
+  font-size: 1rem;
+  line-height: 1.2rem;
+  padding: 5px;
+}
+
+#list img[data-field="photo"] {
+  display: flex;
+  justify-content: center;
+  height: 150px;
+  width: 150px;
+}
+
+#list tr {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  padding: 10px;
+}
+
+tbody {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+}
+
+/*-----------------FILTER BUTTONS FOOTER-------------------*/
+
+.filter__footer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  position: sticky;
+  bottom: 0;
+  background-color: var(--gryf-bg-clr);
+  color: var(--header-clr);
+}
+
+.filter__footer > h1 {
+  font-family: "Harry Potter";
+  font-size: 1.5em;
+  padding-top: 10px;
+}
+
+.filter__footer--lists {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.filter__footer--list {
+  margin: 1em;
+  list-style: none;
+}
+
+.filter__footer--list li {
+  font-family: monospace;
+  padding: 5px;
+}
+
+.filter__footer--list > h2 {
+  font-family: "Harry Potter";
+  color: var(--header-clr);
+  font-size: 1.1em;
+}
+
+.filter {
+  position: relative;
+  background: transparent;
+  border: none;
+  font-family: monospace;
+  font-size: 1.2em;
+  padding: 5px;
+  cursor: pointer;
+  color: var(--header-clr);
+}
+
+.filter::after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  background-color: var(--header-clr);
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.filter:hover::after {
+  transform: scaleX(1);
+}
+
+/*-----------------------------MODAL--------------------------------*/
+
+.hide {
+  visibility: hidden;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.content {
+  color: var(--header-clr);
+  box-shadow: 1px 1px 10px #333;
+  border-radius: 12px;
+  padding: 2em;
+  height: 35rem;
+  width: 35rem;
+}
+
+.crest {
+  height: 150px;
+  width: 150px;
+  margin: 5px 0 5px 0;
+}
+
+/*------------SLYTHERINS------------*/
+.slytherin__bg {
+  background-color: var(--slyt-clr);
+}
+.slytherin__crest {
+  background-image: url(./images/01slytherin.png);
+}
+/*------------HUFFLEPUFFS------------*/
+.hufflepuff__bg {
+  background-color: var(--huff-clr);
+  color: var(--rave-bg-clr);
+}
+.hufflepuff__crest {
+  background-image: url(./images/01hufflepuff.png);
+}
+/*------------RAVENCLWAS------------*/
+.ravenclaw__bg {
+  background-color: var(--rave-bg-clr);
+}
+.ravenclaw__crest {
+  background-image: url(./images/01ravenclaw.png);
+}
+/*------------GRYFFINDORS------------*/
+.gryffindor__bg {
+  background-color: var(--gryf-bg-clr);
+}
+.gryffindor__crest {
+  background-image: url(./images/01gryffindor.png);
+}
+
+.content__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.student__name {
+  font-family: "Harry Potter";
+  color: var(--header-clr);
+  font-size: 1.5em;
+}
+
+#student__modal .close {
+  height: 2rem;
+  width: 2rem;
+}
+
+.top__column {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 1em 0 1em 0;
+}
+
+.bottom__column {
+  margin-bottom: 1em;
+  font-size: 1.2em;
+  line-height: 1.9em;
+  font-family: monospace;
+}
+
+.crest img {
+  width: 120px;
+  height: auto;
+}
+
+.content__body {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.content__body ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.content__buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.content__buttons button {
+  line-height: 2rem;
+  margin: 0.2rem;
+}
+
+#hacker .content {
+  background-image: url(./images/deathEaters.large.png);
+}
+
+#hacker .content__body {
+  align-content: center;
+  flex-direction: column;
+}
+
+#hacker input,
+#hacker select {
+  margin: 0.5rem;
+  border-radius: 12px;
+  padding: 0.5rem;
+  width: 450px;
+}
+
+#hacker select {
+  border: 1px solid #000;
+  color: rgba(0, 0, 0, 1);
+  font-family: "Harry Potter";
+  font-size: 0.8rem;
+  box-shadow: 1px 1px 10px #333;
+}
+
+#hacker button {
+  margin: 1rem;
+}
+
+#hacker .content__header {
+  justify-content: flex-end;
+}
+
+#make__inquis .content,
+#expel__student .content {
+  background-image: url(./images/paperBG.jpg);
+}
+
+#make__inquis .content__header,
+#expel__student .content__header {
+  justify-content: flex-end;
+}
+
+#make__inquis .content__body,
+#expel__student .content__body {
+  font-family: "Harry Potter";
+  padding-top: 30%;
+  margin: 0 auto;
+  font-size: 30px;
+  color: #151515;
+  width: 80%;
 }

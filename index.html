@@ -8,63 +8,191 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!------------------------------------------- header area --------------------------------------->
+
     <header id="topbar">
       <img id="logo" src="/images/02hogwarts.png" alt="Hogwarts Logo" />
       <h1>Hogwarts School of Witchcraft and Wizardry</h1>
+      <input type="search" data-action="search" placeholder="Search students..." />
     </header>
+    <!--------------------------------------- filter crest area ----------------------------------->
 
     <main>
       <nav id="filter_buttons">
-        <button class="filter clicked" data-student="all"></button>
-        <button class="filter" data-student="Slytherin"></button>
-        <button class="filter" data-student="Hufflepuff"></button>
-        <button class="filter" data-student="Ravenclaw"></button>
-        <button class="filter" data-student="Gryffindor"></button>
+        <button class="house clicked" data-action="filter" data-filter="*"></button>
+        <button class="house" data-action="filter" data-filter="Slytherin"></button>
+        <button class="house" data-action="filter" data-filter="Hufflepuff"></button>
+        <button class="house" data-action="filter" data-filter="Ravenclaw"></button>
+        <button class="house" data-action="filter" data-filter="Gryffindor"></button>
       </nav>
 
-      <h3 class="section_header">All Students</h3>
-      <section id="popup">
-        <article class="popup_content">
-          <div class="close">X</div>
-          <div class="popup_column">
-            <h3 class="nickname lastname"></h3>
-            <h4 class="firstname"></h4>
-            <p id="house"></p>
-            <p id="gender"></p>
-            <img id="photo" src="" alt="" />
-          </div>
-          <div class="popup_column"></div>
-        </article>
-      </section>
+      <h3 class="section__header">All Students</h3>
+      <!------------------------------------------- sorting area --------------------------------------->
+
+      <div class="sorting">
+        <p>Sort by</p>
+        <select name="sort__selection" id="sort__selection">
+          <option data-action="sort" data-sort-direction="asc" data-sort="firstName">First name</option>
+          <option data-action="sort" data-sort-direction="asc" data-sort="lastName">Last name</option>
+          <option data-action="sort" data-sort-direction="asc" data-sort="house">House</option>
+          <option data-action="sort" data-sort-direction="asc" data-sort="responsibilities">Responsibilities</option>
+        </select>
+      </div>
+
+      <!---------------------------------------- student template area --------------------------------->
       <table id="list">
-        <thead>
-          <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- student template will be copied and inserted here -->
-        </tbody>
+        <tbody></tbody>
       </table>
     </main>
 
     <template id="student">
       <tr>
-        <td data-field="firstname">NAME</td>
-        <img src="" alt="" />
-        <td data-field="nickname">NAME</td>
-        <td data-field="middlename">NAME</td>
-        <td data-field="lastname">NAME</td>
-        <td data-field="house">HOUSE</td>
-        <td data-field="gender">GENDER</td>
+        <td><img data-field="photo" src="" alt="" /></td>
+        <td data-field="firs">FIRST NAME</td>
+        <td data-field="last">LAST NAME</td>
+        <td data-field="hous">HOUSE</td>
+        <td data-field="resp">RESPONSIBILITIES</td>
       </tr>
     </template>
 
-    <script src="script.js"></script>
+    <!----------------------------------------------- the student Modal area ----------------------------------->
+    <div id="student__modal" class="modal hide">
+      <div class="content">
+        <div class="content__header">
+          <h3 class="student__name"></h3>
+          <button class="close">X</button>
+        </div>
+        <div class="content__body">
+          <div class="top__column">
+            <img src="" alt="" />
+            <div class="crest"></div>
+          </div>
+          <div class="bottom__column">
+            <ul>
+              <li>Gender: <span data-field="gender"></span></li>
+              <li>Blood-status: <span data-field="blood"></span></li>
+              <li>House: <span data-field="house"></span></li>
+              <li>Responsibilities: <span data-field="respons"></span></li>
+              <li>Enrollment status: <span data-field="enroll"></span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div id="remove__other" class="modal hide">
+          <div class="content">
+            <div class="content__header">
+              <button class="close">X</button>
+            </div>
+            <div class="content__body">
+              <p>There can only be one prefect of each house and gender.</p>
+            </div>
+            <div class="content__buttons">
+              <button class="remove__other--prefect">Remove <span data-field="selectedStudent">student</span> as prefect?</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="make__inquis" class="modal hide">
+          <div class="content">
+            <div class="content__header">
+              <button class="close">X</button>
+            </div>
+            <div class="content__body">
+              <p data-field="inquismessage"></p>
+            </div>
+            <div class="content__buttons">
+              <button class="make__inquis--confirm">Make <span data-field="selectedStudent">student</span> an inquisitorial squad member?</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="expel__student" class="modal hide">
+          <div class="content">
+            <div class="content__header">
+              <button class="close">X</button>
+            </div>
+            <div class="content__body">
+              <p data-field="expelmessage"></p>
+            </div>
+            <div class="content__buttons">
+              <button class="expel__student">Expel <span data-field="selectedStudent">student name</span>!</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="hacker" class="modal hide">
+          <div class="content">
+            <div class="content__header">
+              <button class="close">X</button>
+            </div>
+            <div class="content__body">
+              <input id="firstName" type="text" placeholder='Enter first name... Try with "Christian"' />
+              <input id="lastName" type="text" placeholder='Enter last name... Try with "Munch"' />
+              <select id="gender">
+                <option value="Wizard">Wizard</option>
+                <option value="Witch">Witch</option>
+              </select>
+              <select id="house">
+                <option value="Slytherin">Slytherin</option>
+                <option value="Hufflepuff">Hufflepuff</option>
+                <option value="Ravenclaw">Ravenclaw</option>
+                <option value="Gryffindor">Gryffindor</option>
+              </select>
+            </div>
+            <div class="content__buttons">
+              <button class="hack__list">Hack the list!</button>
+            </div>
+          </div>
+        </div>
+
+        <!---------------------------------------- the buttons of fate --------------------------------->
+        <div class="content__buttons">
+          <button class="make__prefect"><span data-field="makePrefect">Make</span> prefect</button>
+          <button class="make__inquis"><span data-field="makeInquis">Make</span> inqisitorial squad member</button>
+          <button class="expel">Expel!</button>
+        </div>
+      </div>
+    </div>
+    <!------------------------------------------- filter footer area --------------------------------------->
+
+    <div class="filter__footer">
+      <h1>Filters</h1>
+      <div class="filter__footer--lists">
+        <ul class="filter__footer--list">
+          <h2>Gender</h2>
+          <li><button class="filter" data-action="filter" data-filter="witch">Witch</button></li>
+          <li><button class="filter" data-action="filter" data-filter="wizard">Wizard</button></li>
+        </ul>
+        <ul class="filter__footer--list">
+          <h2>Responsibilities</h2>
+          <li><button class="filter" data-action="filter" data-filter="inquisitorial">Inquisitorial Squad</button></li>
+          <li><button class="filter" data-action="filter" data-filter="prefect">Prefects</button></li>
+          <li><button class="filter" data-action="filter" data-filter="expelled">Expelled students</button></li>
+        </ul>
+        <ul class="filter__footer--list">
+          <h2>Blood status</h2>
+          <li><button class="filter" data-action="filter" data-filter="muggle-born">Muggle born</button></li>
+          <li><button class="filter" data-action="filter" data-filter="half-blood">Half blood</button></li>
+          <li><button class="filter" data-action="filter" data-filter="pure-blood">Pure blood</button></li>
+        </ul>
+
+        <!---------------------------------------- filter result area --------------------------------->
+        <ul class="filter__footer--list" id="filter__numbers">
+          <h2>Number of students</h2>
+          <li>All students: <span data-field="all"></span></li>
+          <li>Currently showing: <span data-field="currently"></span></li>
+          <li>Expelled students: <span data-field="expelled"></span></li>
+        </ul>
+        <ul class="filter__footer--list" id="filter__numbers">
+          <h2 class="hide">Number of students</h2>
+          <li>From Slytherin: <span data-field="Slytherin"></span></li>
+          <li>From Hufflepuff: <span data-field="Hufflepuff"></span></li>
+          <li>From Ravenclaw: <span data-field="Ravenclaw"></span></li>
+          <li>From Gryffindor: <span data-field="Gryffindor"></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <script src="cleaning.js"></script>
   </body>
 </html>
